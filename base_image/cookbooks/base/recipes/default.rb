@@ -12,3 +12,17 @@ end
 
 gem_package "kitchen-ec2"
 gem_package "kitchen-sync"
+
+package "epel-release"
+package "sshpass"
+
+user "centos" do
+  password "#{node['base']['user']['encrypted_password']}"
+end
+
+cookbook_file "/etc/ssh/sshd_config" do
+  source "sshd_config"
+  mode '0644'
+  owner 'root'
+  group 'root'
+end
