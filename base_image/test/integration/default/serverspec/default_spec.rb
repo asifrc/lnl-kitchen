@@ -11,3 +11,15 @@ end
 describe package("bundler") do
   it { should be_installed.by("gem") }
 end
+
+describe package("test-kitchen") do
+  it { should be_installed.by("gem").with_version("1.12.0") }
+end
+
+describe package("kitchen-ec2") do
+  it { should be_installed.by("gem") }
+end
+
+describe package("kitchen-sync") do
+  it { should be_installed.by("gem") }
+end

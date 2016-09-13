@@ -5,3 +5,10 @@ package "ruby" do
 end
 
 gem_package "bundler"
+
+gem_package "test-kitchen" do
+  version "1.12.0"
+end
+
+gem_package "kitchen-ec2"
+gem_package "kitchen-sync"
