@@ -12,20 +12,21 @@ describe package("bundler") do
   it { should be_installed.by("gem") }
 end
 
-describe package("test-kitchen") do
-  it { should be_installed.by("gem").with_version("1.12.0") }
+context "Test Kitchen gems" do
+  describe package("test-kitchen") do
+    it { should be_installed.by("gem").with_version("1.12.0") }
+  end
+
+  describe package("kitchen-ec2") do
+    it { should be_installed.by("gem") }
+  end
+
+  describe package("kitchen-sync") do
+    it { should be_installed.by("gem") }
+  end
 end
 
-describe package("kitchen-ec2") do
-  it { should be_installed.by("gem") }
-end
-
-describe package("kitchen-sync") do
-  it { should be_installed.by("gem") }
-end
-
-
-context "should authenticate via password" do
+context "User centos should authenticate via password" do
   PASSWORD="notsecure"
   describe package("epel-release") do
     it { should be_installed }
