@@ -45,3 +45,5 @@ cookbook_file "/home/centos/.ssh/id_rsa.pub" do
   owner 'centos'
   group 'centos'
 end
+
+package "vim-enhanced"

@@ -55,3 +55,9 @@ context "Vagrant" do
     it { should be_mode 644 }
   end
 end
+
+context "Project" do
+  describe package("vim-enhanced") do
+    it { should be_installed }
+  end
+end
