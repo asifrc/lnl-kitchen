@@ -44,3 +44,14 @@ context "User centos should authenticate via password" do
     its(:exit_status) { should eq 0 }
   end
 end
+
+context "Vagrant" do
+  describe file("/home/centos/.ssh/id_rsa") do
+    it { should exist }
+    it { should be_mode 600 }
+  end
+  describe file("/home/centos/.ssh/id_rsa.pub") do
+    it { should exist }
+    it { should be_mode 644 }
+  end
+end

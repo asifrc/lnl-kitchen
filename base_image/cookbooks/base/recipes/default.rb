@@ -31,3 +31,17 @@ cookbook_file "/etc/ssh/sshd_config" do
   group 'root'
   notifies :restart, "service[sshd]", :immediately
 end
+
+cookbook_file "/home/centos/.ssh/id_rsa" do
+  source "vagrant_insecure_key"
+  mode '0600'
+  owner 'centos'
+  group 'centos'
+end
+
+cookbook_file "/home/centos/.ssh/id_rsa.pub" do
+  source "vagrant_insecure_key.pub"
+  mode '0644'
+  owner 'centos'
+  group 'centos'
+end
