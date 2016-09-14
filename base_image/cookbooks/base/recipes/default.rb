@@ -20,9 +20,14 @@ user "centos" do
   password "#{node['base']['user']['encrypted_password']}"
 end
 
+service "sshd" do
+  action :nothing
+end
+
 cookbook_file "/etc/ssh/sshd_config" do
   source "sshd_config"
   mode '0644'
   owner 'root'
   group 'root'
+  notifies :restart, "service[sshd]", :immediately
 end
