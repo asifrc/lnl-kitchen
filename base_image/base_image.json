@@ -7,6 +7,14 @@
     "source_ami": "ami-f068a193",
     "instance_type": "t2.micro",
     "ssh_username": "centos",
-    "ami_name": "lltest {{timestamp}}"
+    "ssh_pty": true,
+    "ami_name": "twu51ll base {{timestamp}}"
+  }],
+  "provisioners": [{
+    "type": "chef-solo",
+    "cookbook_paths": ["cookbooks"],
+    "run_list": [
+      "base::default"
+    ]
   }]
 }
