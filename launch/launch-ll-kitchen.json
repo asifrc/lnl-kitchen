@@ -4,7 +4,7 @@
     "Workstation": {
       "Type": "AWS::EC2::Instance",
       "Properties": {
-        "ImageId": "ami-ed2bf18e",
+        "ImageId": "ami-c62cf6a5",
         "InstanceType": "t2.micro",
         "SecurityGroups": ["insecure"],
         "KeyName": "vagrant_insecure_key"
