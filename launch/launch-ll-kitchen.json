@@ -1,0 +1,20 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Resources": {
+    "Workstation": {
+      "Type": "AWS::EC2::Instance",
+      "Properties": {
+        "ImageId": "ami-ed2bf18e",
+        "InstanceType": "t2.micro",
+        "SecurityGroups": ["insecure"],
+        "KeyName": "vagrant_insecure_key"
+      }
+    }
+  },
+  "Outputs": {
+    "WorkstationIP": {
+      "Value": { "Fn::GetAtt" : [ "Workstation", "PublicDnsName" ]},
+      "Description": "Workstation IP Address"
+    }
+  }
+}
