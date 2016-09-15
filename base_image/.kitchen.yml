@@ -27,3 +27,8 @@ suites:
   - name: default
     run_list:
       - recipe[base::default]
+    attributes:
+      project:
+        aws:
+          access_key: <%= ENV['AWS_ACCESS_KEY_ID'] || "AKIAfakekey" %>
+          secret_key: <%= ENV['AWS_SECRET_ACCESS_KEY'] || "notsosecret" %>

@@ -1,4 +1,8 @@
 {
+  "variables": {
+    "aws_access": "{{env `AWS_ACCESS_KEY_ID`}}",
+    "aws_secret": "{{env `AWS_SECRET_ACCESS_KEY`}}"
+  },
   "builders": [{
     "type": "amazon-ebs",
     "access_key": "{{user `aws_access_key`}}",
@@ -15,6 +19,14 @@
     "cookbook_paths": ["cookbooks"],
     "run_list": [
       "base::default"
-    ]
+    ],
+    "json": {
+      "project": {
+        "aws": {
+          "access_key": "{{user `aws_access`}}",
+          "secret_key": "{{user `aws_secret`}}"
+        }
+      }
+    }
   }]
 }

@@ -47,3 +47,13 @@ cookbook_file "/home/centos/.ssh/id_rsa.pub" do
 end
 
 package "vim-enhanced"
+
+env_vars = {}
+env_vars['AWS_ACCESS_KEY_ID'] = node['project']['aws']['access_key']
+env_vars['AWS_SECRET_ACCESS_KEY'] = node['project']['aws']['secret_key']
+
+template "/home/centos/.bashrc" do
+  source "bashrc.erb"
+  sensitive true
+  variables :env_vars => env_vars
+end

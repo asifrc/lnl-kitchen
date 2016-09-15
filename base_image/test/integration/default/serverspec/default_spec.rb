@@ -50,6 +50,7 @@ context "Vagrant" do
     it { should exist }
     it { should be_mode 600 }
   end
+
   describe file("/home/centos/.ssh/id_rsa.pub") do
     it { should exist }
     it { should be_mode 644 }
@@ -59,5 +60,13 @@ end
 context "Project" do
   describe package("vim-enhanced") do
     it { should be_installed }
+  end
+
+  describe command("echo $AWS_ACCESS_KEY_ID") do
+    its(:stdout) { should match "AKIA" }
+  end
+
+  describe command("echo $AWS_SECRET_ACCESS_KEY") do
+    its(:stdout) { should_not eq "\n" }
   end
 end
