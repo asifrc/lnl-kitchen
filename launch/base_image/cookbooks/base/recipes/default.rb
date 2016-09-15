@@ -60,5 +60,20 @@ end
 
 git "/home/centos/lnl-kitchen" do
   repository "https://github.com/asifrc/lnl-kitchen.git"
+  user 'centos'
+  group 'centos'
   action :sync
+end
+
+remote_file "/tmp/janus.tar.gz" do
+  source "https://s3.amazonaws.com/launchandlearn/twu/janus.tar.gz"
+end
+
+execute "tar -xvzf /tmp/janus.tar.gz" do
+  cwd "/home/centos"
+  action :run
+end
+
+link "/home/centos/.vimrc" do
+  to "/home/centos/.vim/janus/vim/vimrc"
 end

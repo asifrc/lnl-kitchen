@@ -73,4 +73,12 @@ context "Project" do
   describe file("/home/centos/lnl-kitchen/.git/config") do
     its(:content) { should match "lnl-kitchen.git" }
   end
+
+  describe file("/home/centos/.vim") do
+    it { should be_directory }
+  end
+
+  describe file("/home/centos/.vimrc") do
+    it { should be_symlink }
+  end
 end
