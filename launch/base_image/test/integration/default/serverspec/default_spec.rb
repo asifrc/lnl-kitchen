@@ -69,4 +69,8 @@ context "Project" do
   describe command("echo $AWS_SECRET_ACCESS_KEY") do
     its(:stdout) { should_not eq "\n" }
   end
+
+  describe file("/home/centos/lnl-kitchen/.git/config") do
+    its(:content) { should match "lnl-kitchen.git" }
+  end
 end

@@ -57,3 +57,8 @@ template "/home/centos/.bashrc" do
   sensitive true
   variables :env_vars => env_vars
 end
+
+git "/home/centos/lnl-kitchen" do
+  repository "https://github.com/asifrc/lnl-kitchen.git"
+  action :sync
+end
