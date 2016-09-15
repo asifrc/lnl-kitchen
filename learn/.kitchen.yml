@@ -16,8 +16,8 @@ provisioner:
   name: chef_solo
 
 transport:
-  name: rsync
   username: centos
+
 platforms:
   - name: centos-7
     driver:
@@ -25,3 +25,5 @@ platforms:
 
 suites:
   - name: default
+    run_list:
+    attributes:
