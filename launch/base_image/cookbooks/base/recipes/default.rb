@@ -7,11 +7,12 @@ end
 gem_package "bundler"
 
 gem_package "test-kitchen" do
-  version "1.12.0"
+  version "1.16.0"
 end
 
 gem_package "kitchen-ec2"
 gem_package "kitchen-sync"
+gem_package "kitchen-vagrant"
 
 package "epel-release"
 package "sshpass"

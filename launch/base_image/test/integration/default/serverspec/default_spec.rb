@@ -16,7 +16,7 @@ end
 
 context "Test Kitchen gems" do
   describe package("test-kitchen") do
-    it { should be_installed.by("gem").with_version("1.12.0") }
+    it { should be_installed.by("gem").with_version("1.16.0") }
   end
 
   describe package("kitchen-ec2") do
