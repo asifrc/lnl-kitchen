@@ -1,11 +1,13 @@
 require 'spec_helper'
 
+USER="centos"
+
 describe package("git") do
   it { should be_installed }
 end
 
 describe package("ruby") do
-  it { should be_installed.with_version("2.0.0.598-25.el7_1") }
+  it { should be_installed.with_version("2.0.0.648-29.el7") }
 end
 
 describe package("bundler") do
@@ -26,32 +28,22 @@ context "Test Kitchen gems" do
   end
 end
 
-context "User centos should authenticate via password" do
-  PASSWORD="notsecure"
-  describe package("epel-release") do
-    it { should be_installed }
-  end
-
-  describe package("sshpass") do
-    it { should be_installed }
-  end
-
-  describe user("centos") do
-    its(:encrypted_password) { should_not match(/^.{0,2}$/) }
-  end
-
-  describe command("sshpass -p#{PASSWORD} ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no centos@localhost exit") do
-    its(:exit_status) { should eq 0 }
-  end
-end
 
 context "Vagrant" do
-  describe file("/home/centos/.ssh/id_rsa") do
+  describe file("/home/#{USER}/.ssh/id_rsa") do
     it { should exist }
     it { should be_mode 600 }
   end
 
-  describe file("/home/centos/.ssh/id_rsa.pub") do
+  describe file("/home/#{USER}/.ssh/id_rsa.pub") do
+    it { should exist }
+    it { should be_mode 644 }
+  end
+  describe file("/home/#{USER}/.ssh/vagrant_insecure") do
+    it { should exist }
+    it { should be_mode 600 }
+  end
+  describe file("/home/#{USER}/.ssh/vagrant_insecure.pub") do
     it { should exist }
     it { should be_mode 644 }
   end
@@ -70,15 +62,15 @@ context "Project" do
     its(:stdout) { should_not eq "\n" }
   end
 
-  describe file("/home/centos/lnl-kitchen/.git/config") do
+  describe file("/home/#{USER}/lnl-kitchen/.git/config") do
     its(:content) { should match "lnl-kitchen.git" }
   end
 
-  describe file("/home/centos/.vim") do
+  describe file("/home/#{USER}/.vim") do
     it { should be_directory }
   end
 
-  describe file("/home/centos/.vimrc") do
+  describe file("/home/#{USER}/.vimrc") do
     it { should be_symlink }
   end
 end

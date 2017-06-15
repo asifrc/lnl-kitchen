@@ -1,7 +1,7 @@
 package "git"
 
 package "ruby" do
-  version "2.0.0.598-25.el7_1"
+  version "2.0.0.648-29.el7"
 end
 
 gem_package "bundler"
@@ -16,34 +16,34 @@ gem_package "kitchen-sync"
 package "epel-release"
 package "sshpass"
 
-user "centos" do
-  password "#{node['base']['user']['encrypted_password']}"
-end
+USER = node['base']['user']
 
-service "sshd" do
-  action :nothing
-end
-
-cookbook_file "/etc/ssh/sshd_config" do
-  source "sshd_config"
-  mode '0644'
-  owner 'root'
-  group 'root'
-  notifies :restart, "service[sshd]", :immediately
-end
-
-cookbook_file "/home/centos/.ssh/id_rsa" do
+cookbook_file "/home/#{USER}/.ssh/id_rsa" do
   source "vagrant_insecure_key"
   mode '0600'
-  owner 'centos'
-  group 'centos'
+  owner "#{USER}"
+  group "#{USER}"
 end
 
-cookbook_file "/home/centos/.ssh/id_rsa.pub" do
+cookbook_file "/home/#{USER}/.ssh/id_rsa.pub" do
   source "vagrant_insecure_key.pub"
   mode '0644'
-  owner 'centos'
-  group 'centos'
+  owner "#{USER}"
+  group "#{USER}"
+end
+
+cookbook_file "/home/#{USER}/.ssh/vagrant_insecure" do
+  source "vagrant_insecure_key"
+  mode '0600'
+  owner "#{USER}"
+  group "#{USER}"
+end
+
+cookbook_file "/home/#{USER}/.ssh/vagrant_insecure.pub" do
+  source "vagrant_insecure_key.pub"
+  mode '0644'
+  owner "#{USER}"
+  group "#{USER}"
 end
 
 package "vim-enhanced"
@@ -52,16 +52,16 @@ env_vars = {}
 env_vars['AWS_ACCESS_KEY_ID'] = node['project']['aws']['access_key']
 env_vars['AWS_SECRET_ACCESS_KEY'] = node['project']['aws']['secret_key']
 
-template "/home/centos/.bashrc" do
+template "/home/#{USER}/.bashrc" do
   source "bashrc.erb"
   sensitive true
   variables :env_vars => env_vars
 end
 
-git "/home/centos/lnl-kitchen" do
+git "/home/#{USER}/lnl-kitchen" do
   repository "https://github.com/asifrc/lnl-kitchen.git"
-  user 'centos'
-  group 'centos'
+  user "#{USER}"
+  group "#{USER}"
   action :sync
 end
 
