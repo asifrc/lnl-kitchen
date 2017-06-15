@@ -2,14 +2,14 @@
 driver:
   name: ec2
   aws_ssh_key_id: vagrant_insecure
-  security_group_ids: ["sg-1187bb78"]
+  security_group_ids: ["sg-42e8d62b"]
   region: us-east-2
   availability_zone: us-east-2a
   require_chef_omnibus: true
-  subnet_id: "subnet-2c29db45"
+  subnet_id: "subnet-69b2de00"
   instance_type: t2.micro
   associate_public_ip: true
-  interface: dns
+  interface: public
 
 provisioner:
   name: chef_solo
