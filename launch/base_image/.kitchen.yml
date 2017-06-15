@@ -1,27 +1,27 @@
 ---
 driver:
   name: ec2
-  aws_ssh_key_id: NAarchoud
-  security_group_ids: ["sg-f1645695"]
-  region: ap-southeast-1
-  availability_zone: ap-southeast-1a
+  aws_ssh_key_id: vagrant_insecure
+  security_group_ids: ["sg-1187bb78"]
+  region: us-east-2
+  availability_zone: us-east-2a
   require_chef_omnibus: true
-  subnet_id: "subnet-12226477"
+  subnet_id: "subnet-2c29db45"
   instance_type: t2.micro
   associate_public_ip: true
   interface: dns
-  image_id: ami-f068a193
 
 provisioner:
   name: chef_solo
 
 transport:
   username: centos
+  ssh_key: ~/.ssh/vagrant_insecure
 
 platforms:
-  - name: centos-7
+  - name: centos7
     driver:
-      image_id: ami-f068a193
+      image_id: ami-18f8df7d
 
 suites:
   - name: default
