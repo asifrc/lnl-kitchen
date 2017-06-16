@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-bundler="$(which bundler || echo not installed)"
+bundler="$(which bundle || echo not installed)"
 if [ "$bundler" == "not installed" ]; then
   gem install bundler
 fi
