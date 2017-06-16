@@ -5,9 +5,7 @@ if [ "$bundler" == "not installed" ]; then
   gem install bundler
 fi
 
-cd .sync
 bundle install
-cd ..
 
 KEY="$HOME/.ssh/vagrant_insecure"
 
