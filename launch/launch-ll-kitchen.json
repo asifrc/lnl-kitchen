@@ -4,10 +4,10 @@
     "Workstation": {
       "Type": "AWS::EC2::Instance",
       "Properties": {
-        "ImageId": "ami-c62cf6a5",
+        "ImageId": "ami-e4ba9c81",
         "InstanceType": "t2.micro",
         "SecurityGroups": ["insecure"],
-        "KeyName": "vagrant_insecure_key"
+        "KeyName": "vagrant_insecure"
       }
     }
   },
@@ -15,6 +15,42 @@
     "WorkstationIP": {
       "Value": { "Fn::GetAtt" : [ "Workstation", "PublicDnsName" ]},
       "Description": "Workstation IP Address"
+    },
+    "Username": {
+      "Value": "centos",
+      "Description": "SSH Username"
+    },
+    "Password": {
+      "Value": "Use ~/.ssh/vagrant_insecure",
+      "Description": "SSH Auth"
+    },
+    "Instructions": {
+      "Value": { "Fn::Join": [ "<br>\n", [
+        "<b># Clone workshop</b>",
+        "git clone https://github.com/asifrc/lnl-kitchen.git",
+        "cd lnl-kitchen",
+        "",
+        "<b># Install ssh keys and dependencies</b>",
+        "./init.sh",
+        "",
+        "<b># Start file sync</b>",
+        { "Fn::Join": [ "", [
+          "./start_sync.sh centos@",
+          { "Fn::GetAtt" : [ "Workstation", "PublicDnsName" ]}
+        ]]},
+        "",
+        "<b># Open up the learn directory in your favorite editor</b>",
+        "",
+        "<b># Login to the workstation</b>",
+        { "Fn::Join": [ "", [
+          "ssh -i ~/.ssh/vagrant_insecure centos@",
+          { "Fn::GetAtt" : [ "Workstation", "PublicDnsName" ]}
+        ]]},
+        "",
+        ""
+      ]]},
+      "Description": "Workshop Instructions"
     }
   }
 }
+
