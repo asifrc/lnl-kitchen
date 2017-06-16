@@ -9,7 +9,7 @@ driver:
   subnet_id: "subnet-69b2de00"
   instance_type: t2.micro
   associate_public_ip: true
-  interface: public
+  interface: dns
 
 provisioner:
   name: chef_solo
